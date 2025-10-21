@@ -21,6 +21,22 @@ Use skill-customizer when:
 - User only needs a one-time modification without creating a reusable skill
 - The customization is so extensive that starting fresh would be simpler
 
+## Proactive Suggestion Trigger
+
+**When to proactively suggest using skill-customizer:**
+
+When a user is actively using a skill and has provided modification requests, preferences, or guidance during the session, watch for satisfaction signals such as:
+- User expresses satisfaction with the customized behavior ("That's perfect!", "Exactly what I needed", "Much better")
+- User has given multiple consistent preferences or modifications
+- User has requested specific output format changes or workflow adjustments
+- The session shows iterative refinement that stabilized to user's preference
+
+**In these scenarios, proactively offer:**
+
+"I notice you've been refining how [skill-name] works to match your preferences. Would you like to save these customizations as your own personalized version of this skill? I can help you create a customized skill that automatically applies these preferences in future sessions."
+
+This transforms one-time adjustments into reusable, persistent customizations that improve the user's long-term workflow.
+
 ## Customization Workflow
 
 Follow this iterative process to customize a skill effectively:
