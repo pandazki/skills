@@ -159,49 +159,30 @@ Ask the user:
 If more improvements needed: return to Phase 3
 If satisfied: proceed to Phase 5
 
-### Phase 5: Finalize and Package (Optional)
+### Phase 5: Packaging the Skill
 
-**Confirm readiness**
+Once the skill is ready, package it into a distributable zip file. The packaging process automatically validates the skill first to ensure it meets all requirements.
 
-Ensure:
-- All customizations are complete
-- CUSTOMIZATION_LOG.md is fully updated
-- Skill tested on real tasks and working as expected
-- All documentation is accurate
-- No leftover TODOs or placeholder content
-
-**Package for distribution (optional)**
-
-Packaging is optional and only needed when:
-- ✅ Ready to install in Claude.ai or Claude Desktop
-- ✅ Sharing with team members or other users
-- ✅ Want to lock a stable version
-
-During development, use the forked directory directly without packaging.
-
-To package:
 ```bash
-python3 scripts/finalize_skill.py <skill-directory> [--output <output-dir>]
+python3 scripts/finalize_skill.py <skill-directory>
 ```
 
-This creates a timestamped zip file: `{skill-name}-{YYYYMMDD-HHMMSS}.zip`
+Optional output directory specification:
 
-**Use the customized skill**
+```bash
+python3 scripts/finalize_skill.py <skill-directory> ./dist
+```
 
-**Option A: Direct use (during development)**
-- Use the forked skill directory directly
-- Ideal for rapid iteration
-- No packaging needed
+The packaging script will:
 
-**Option B: Install packaged version (for distribution)**
-- Required for Claude.ai and Claude Desktop
-- Necessary when sharing with others
-- Creates a stable, versioned snapshot
+1. **Validate** the skill automatically, checking:
+   - YAML frontmatter format and required fields
+   - Skill naming conventions and directory structure
+   - Description completeness and quality
 
-Installation methods for packaged skills:
-- **Claude.ai:** Upload skill via Skills → Upload skill
-- **Claude Desktop:** Install via Settings → Skills → Install
-- **Share with others:** Send the timestamped zip file
+2. **Package** the skill if validation passes, creating a timestamped zip file: `{skill-name}-{YYYYMMDD-HHMMSS}.zip`
+
+If validation fails, the script will report the errors and exit without creating a package. Fix any validation errors and run the packaging command again.
 
 ## Best Practices
 
@@ -264,24 +245,33 @@ scripts/track_feedback.py <skill-directory>
 - Helps prioritize customization efforts
 
 ### scripts/finalize_skill.py
-Validates and packages a customized skill with timestamp for distribution and installation.
+Validates and packages a customized skill with timestamp for distribution.
 
 **Usage:**
 ```bash
-scripts/finalize_skill.py <skill-directory> [--output <output-directory>]
+scripts/finalize_skill.py <skill-directory> [output-directory]
 ```
 
 **What it does:**
-- Confirms user is ready to finalize
-- Validates skill structure and frontmatter
+- Validates skill structure and frontmatter automatically
 - Creates timestamped zip file: `{skill-name}-{YYYYMMDD-HHMMSS}.zip`
-- Provides installation instructions
 
-**When to use:**
-- Ready to install in Claude.ai or Claude Desktop
-- Want to share with others
-- Want to create a stable, versioned snapshot
-- NOT needed during active development (can use forked directory directly)
+The timestamp allows tracking different versions and iterations of the customized skill.
+
+### scripts/quick_validate.py
+Standalone validation script for checking skill structure without packaging.
+
+**Usage:**
+```bash
+scripts/quick_validate.py <skill-directory>
+```
+
+**What it does:**
+- Checks YAML frontmatter format
+- Validates required fields (name, description)
+- Verifies naming conventions
+
+Use this during development to validate changes before packaging.
 
 ### references/customization_patterns.md
 Comprehensive guide to common customization patterns, detailed examples, and best practices.
